@@ -1,0 +1,87 @@
+package by.bsu.travelagency.config;
+
+import com.opentable.db.postgres.embedded.EmbeddedPostgres;
+import org.flywaydb.core.Flyway;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.Properties;
+
+@Configuration
+@ComponentScan(basePackages = {"by.bsu.travelagency.entity",
+        "by.bsu.travelagency.parser",
+        "by.bsu.travelagency.repository",
+        "by.bsu.travelagency.repository",
+        "by.bsu.travelagency.specification",
+        "by.bsu.travelagency.config",
+        "by.bsu.travelagency.util"})
+public class TestAppConfig {
+    @Bean
+    EmbeddedPostgres embeddedPostgres() throws IOException {
+        return EmbeddedPostgres.start();
+    }
+
+    @Bean
+    @DependsOn("embeddedPostgres")
+    DataSource dataSource(EmbeddedPostgres embeddedPostgres) {
+        return embeddedPostgres.getPostgresDatabase();
+    }
+
+    @Bean(initMethod = "migrate")
+    @DependsOn("dataSource")
+    public Flyway flyway(DataSource dataSource) {
+        return Flyway.configure().mixed(true).dataSource(dataSource).load();
+    }
+
+    @Bean
+    @DependsOn("flyway")
+    public LocalContainerEntityManagerFactoryBean getManagerFactory(DataSource dataSource) {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(dataSource);
+        emf.setPackagesToScan("by.bsu.travelagency.entity");
+
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setDatabase(Database.POSTGRESQL);
+        adapter.setGenerateDdl(true);
+
+        emf.setJpaVendorAdapter(adapter);
+        emf.setJpaProperties(jpaProperties());
+
+        return emf;
+    }
+
+    @Bean
+    @DependsOn("flyway")
+    public PlatformTransactionManager transactionManager(EntityManagerFactory managerFactory, DataSource dataSource) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(managerFactory);
+        transactionManager.setDataSource(dataSource);
+        return transactionManager;
+    }
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+
+    private Properties jpaProperties() {
+        Properties properties = new Properties();
+        properties.setProperty("hibernate.hbm2ddl.auto", "validate");
+        properties.setProperty("hibernate.default_schema", "travel_agency");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.format_sql", "true");
+        return properties;
+    }
+}
