@@ -14,6 +14,7 @@ public class ToursByCountryId implements Specification<Tour> {
     public ToursByCountryId(String countryId) {
         this.countryId = Integer.valueOf(countryId);
     }
+
     @Override
     public Predicate toPredicate(Root<Tour> root, CriteriaBuilder builder) {
         return builder.equal(root.get("countryId"), countryId);

@@ -28,8 +28,8 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void readAll_correctListSize() {
-        Assert.assertEquals(ADDITIONAL_USER_ID - 1, repository.read().size());
+    public void findAll_correctListSize() {
+        Assert.assertEquals(ADDITIONAL_USER_ID - 1, repository.findAll().size());
     }
 
     @Test

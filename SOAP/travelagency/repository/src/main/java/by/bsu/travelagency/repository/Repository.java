@@ -5,7 +5,7 @@ import by.bsu.travelagency.specification.Specification;
 import java.util.List;
 
 public interface Repository<T> {
-    List<T> read();
+    List<T> findAll();
 
     void save(T model);
 
@@ -19,5 +19,5 @@ public interface Repository<T> {
 
     List<T> paginate(int pageId, int total);
 
-    public Long getCountOfEntity();
+    Long getCountOfEntity();
 }

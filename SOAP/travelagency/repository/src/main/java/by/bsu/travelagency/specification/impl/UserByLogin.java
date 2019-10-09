@@ -14,6 +14,7 @@ public class UserByLogin implements Specification<User> {
     public UserByLogin(String login) {
         this.login = login;
     }
+
     @Override
     public Predicate toPredicate(Root<User> root, CriteriaBuilder builder) {
         return builder.equal(root.get("login"), login);

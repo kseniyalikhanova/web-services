@@ -38,12 +38,12 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
     @Override
-    public T findById(Integer id) {
+    public T findById(final Integer id) {
         return entityManager.find(clazz, id);
     }
 
     @Override
-    public List<T> findBySpecification(Specification<T> specification){
+    public List<T> findBySpecification(final Specification<T> specification) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
         Root<T> root = criteriaQuery.from(clazz);
@@ -53,7 +53,7 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
     @Override
-    public List<T> paginate(int pageId, int total){
+    public List<T> paginate(int pageId, int total) {
 
         int firstEntityId = (pageId - 1) * total + 1;
 
@@ -65,9 +65,9 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
     @Override
-    public Long getCountOfEntity(){
+    public Long getCountOfEntity() {
         return (Long) entityManager
-                        .createQuery("SELECT COUNT(t) FROM " + clazz.getName() + " t")
-                        .getSingleResult();
+                .createQuery("SELECT COUNT(t) FROM " + clazz.getName() + " t")
+                .getSingleResult();
     }
 }

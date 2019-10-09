@@ -23,11 +23,11 @@ public class HotelServiceTest {
     private HotelServiceImpl service;
 
     @Test
-    public void readAll_correctListSize() {
+    public void findAll_correctListSize() {
         List answer = mock(List.class);
         when(answer.size()).thenReturn(100);
-        when(repository.read()).thenReturn(answer);
-        Assert.assertEquals(100, service.read().size());
+        when(repository.findAll()).thenReturn(answer);
+        Assert.assertEquals(100, service.findAll().size());
     }
 
     @Test

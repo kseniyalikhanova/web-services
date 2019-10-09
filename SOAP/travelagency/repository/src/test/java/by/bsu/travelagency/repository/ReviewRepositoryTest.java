@@ -52,8 +52,8 @@ public class ReviewRepositoryTest {
     }
 
     @Test
-    public void readAll_correctListSize() {
-        Assert.assertEquals(ADDITIONAL_REVIEW_ID - 1, repository.read().size());
+    public void findAll_correctListSize() {
+        Assert.assertEquals(ADDITIONAL_REVIEW_ID - 1, repository.findAll().size());
     }
 
     @Test

@@ -19,7 +19,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
     }
 
     @Override
-    public List<User> read() {
+    public List<User> findAll() {
         List<User> users = entityManager.createNamedQuery(
                 QueryName.FIND_ALL_USERS, User.class)
                 .getResultList();

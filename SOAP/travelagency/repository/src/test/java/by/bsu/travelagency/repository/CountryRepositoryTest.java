@@ -22,8 +22,8 @@ public class CountryRepositoryTest {
     private CountryRepository repository;
 
     @Test
-    public void readAll_correctListSize() {
-        Assert.assertEquals(ADDITIONAL_COUNTRY_ID - 1, repository.read().size());
+    public void findAll_correctListSize() {
+        Assert.assertEquals(ADDITIONAL_COUNTRY_ID - 1, repository.findAll().size());
     }
 
     @Test

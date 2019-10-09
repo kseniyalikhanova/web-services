@@ -17,7 +17,7 @@ public class HotelRepositoryImpl extends AbstractRepository<Hotel> implements Ho
     }
 
     @Override
-    public List<Hotel> read() {
+    public List<Hotel> findAll() {
         List<Hotel> hotels = entityManager.createNamedQuery(
                                 QueryName.FIND_ALL_HOTELS, Hotel.class)
                             .getResultList();

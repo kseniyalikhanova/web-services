@@ -54,8 +54,8 @@ public class TourRepositoryTest {
     }
 
     @Test
-    public void readAll_correctListSize() {
-        Assert.assertEquals(ADDITIONAL_TOUR_ID - 1, repository.read().size());
+    public void findAll_correctListSize() {
+        Assert.assertEquals(ADDITIONAL_TOUR_ID - 1, repository.findAll().size());
     }
 
     @Test

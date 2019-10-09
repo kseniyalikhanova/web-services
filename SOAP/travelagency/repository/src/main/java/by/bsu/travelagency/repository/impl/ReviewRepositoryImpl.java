@@ -19,7 +19,7 @@ public class ReviewRepositoryImpl extends AbstractRepository<Review> implements 
     }
 
     @Override
-    public List<Review> read() {
+    public List<Review> findAll() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Review> criteriaQuery = criteriaBuilder.createQuery(Review.class);
         Root<Review> countryRoot = criteriaQuery.from(Review.class);

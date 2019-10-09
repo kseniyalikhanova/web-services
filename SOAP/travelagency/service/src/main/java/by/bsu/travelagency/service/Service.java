@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Service<T> {
 
-    List<T> read();
+    List<T> findAll();
 
     void remove(final Integer id);
 

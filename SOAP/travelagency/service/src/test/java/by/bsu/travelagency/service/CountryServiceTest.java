@@ -23,11 +23,11 @@ public class CountryServiceTest {
     private CountryServiceImpl service;
 
     @Test
-    public void readAll_correctListSize() {
+    public void findAll_correctListSize() {
         List answer = mock(List.class);
         when(answer.size()).thenReturn(25);
-        when(repository.read()).thenReturn(answer);
-        Assert.assertEquals(25, service.read().size());
+        when(repository.findAll()).thenReturn(answer);
+        Assert.assertEquals(25, service.findAll().size());
     }
 
     @Test

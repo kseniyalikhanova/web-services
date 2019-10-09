@@ -59,7 +59,7 @@ public class AppConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
         properties.setProperty("hibernate.show_sql", "true");
-        properties.put("hibernate.hbm2ddl.auto","update");
+        properties.put("hibernate.hbm2ddl.auto", "update");
         return properties;
     }
 

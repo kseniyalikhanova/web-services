@@ -17,6 +17,7 @@ public class ToursByType implements Specification<Tour> {
         this.type = TourType.valueOf(tourType.replaceAll(SPACE, UNDERSCORE)
                                              .toUpperCase());
     }
+
     @Override
     public Predicate toPredicate(Root<Tour> root, CriteriaBuilder builder) {
         return builder.equal(root.get("tourType"), type);

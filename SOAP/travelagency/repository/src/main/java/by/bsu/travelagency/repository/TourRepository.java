@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TourRepository extends Repository<Tour> {
 
-        List<Review> findReviewsByTour(final Integer tour);
+    List<Review> findReviewsByTour(final Integer tour);
 }

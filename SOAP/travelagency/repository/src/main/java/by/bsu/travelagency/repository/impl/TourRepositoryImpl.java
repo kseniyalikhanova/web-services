@@ -18,7 +18,7 @@ public class TourRepositoryImpl extends AbstractRepository<Tour> implements Tour
     }
 
     @Override
-    public List<Tour> read() {
+    public List<Tour> findAll() {
         List<Tour> tours = entityManager.createNamedQuery(
                                 QueryName.FIND_ALL_TOURS, Tour.class)
                             .getResultList();

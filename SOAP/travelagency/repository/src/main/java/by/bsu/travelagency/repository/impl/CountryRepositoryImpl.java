@@ -17,7 +17,7 @@ public class CountryRepositoryImpl extends AbstractRepository<Country> implement
     }
 
     @Override
-    public List<Country> read() {
+    public List<Country> findAll() {
         List<Country> countries = entityManager.createNamedQuery(
                                         QueryName.FIND_ALL_COUNTRIES, Country.class)
                                     .getResultList();

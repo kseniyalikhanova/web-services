@@ -17,8 +17,8 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
     @Override
-    public List<T> read() {
-        return repository.read();
+    public List<T> findAll() {
+        return repository.findAll();
     }
 
     @Override
