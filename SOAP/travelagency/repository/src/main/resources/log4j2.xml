@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <File name="LogDebugFile" fileName="logger/debug.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="LogInfoFile" fileName="logger/info.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="LogRepositoryFile" fileName="logger/infoRepository.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="LogErrorFile" fileName="logger/error.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="All">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LogErrorFile" level="fatal"/>
+            <AppenderRef ref="LogErrorFile" level="error"/>
+            <AppenderRef ref="LogInfoFile" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>
