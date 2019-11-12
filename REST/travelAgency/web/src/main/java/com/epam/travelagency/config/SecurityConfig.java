@@ -25,6 +25,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         builder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers("/v2/api-docs", "/configuration/**",
+//                "/swagger*/**", "/webjars/**",
+//                "/oauth/**");
+//    }
+//
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity

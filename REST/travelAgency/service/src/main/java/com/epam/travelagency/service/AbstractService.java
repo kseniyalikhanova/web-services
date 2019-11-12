@@ -36,9 +36,4 @@ public abstract class AbstractService<T, R extends Repository<T>> implements Ser
     public List<T> paginate(int pageId, int total)  {
         return repository.findAll(PageRequest.of(pageId - 1, total, Sort.by("id"))).getContent();
     }
-
-    @Override
-    public Long getCountOfEntity() {
-        return repository.count();
-    }
 }

@@ -11,6 +11,4 @@ public interface Service<T> {
     T getById(final Integer id);
 
     List<T> paginate(int pageId, int total);
-
-    Long getCountOfEntity();
 }

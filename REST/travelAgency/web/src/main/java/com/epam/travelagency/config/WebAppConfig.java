@@ -21,11 +21,6 @@ public class WebAppConfig extends SpringBootServletInitializer implements WebMvc
     }
 
     @Override
-    public void configureViewResolvers(ViewResolverRegistry resolverRegistry) {
-        resolverRegistry.freeMarker();
-    }
-
-    @Override
     public void addResourceHandlers(final ResourceHandlerRegistry resourceHandlerRegistry) {
         resourceHandlerRegistry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }

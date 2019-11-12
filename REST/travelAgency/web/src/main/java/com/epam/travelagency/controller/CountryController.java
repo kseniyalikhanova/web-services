@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/country")
+@RequestMapping("/api/country")
 public class CountryController {
 
     private final CountryService countryService;
@@ -20,8 +20,8 @@ public class CountryController {
         this.countryService = countryService;
     }
 
-    @GetMapping("/all/{page}")
-    public ResponseEntity<List<Country>> getAll(@PathVariable(value = "page", required = false)
+    @GetMapping(value = {"/all/{page}", "/all"})
+    public  @ResponseBody ResponseEntity<List<Country>> getAll(@PathVariable(value = "page", required = false)
                                                             Integer page) {
         int total = 10;
         if (page == null) {

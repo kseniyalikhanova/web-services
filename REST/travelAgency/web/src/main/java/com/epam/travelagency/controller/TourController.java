@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/tour")
+@RequestMapping("/api/tour")
 public class TourController {
 
     private final TourService tourService;
@@ -31,7 +31,7 @@ public class TourController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/all/{page}")
+    @GetMapping(value = {"/all/{page}", "/all"})
     public ResponseEntity<List<Tour>> getAll(@PathVariable(value = "page", required = false)
                                                          Integer page) {
         int total = 10;

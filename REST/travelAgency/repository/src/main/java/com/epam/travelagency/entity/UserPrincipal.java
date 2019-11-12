@@ -4,12 +4,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails {
     private Integer id;
+    @Size(min = 4, max = 100)
     private String username;
+    @Pattern(regexp = "(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])\\w{6,20}")
     private String password;
     private List<GrantedAuthority> authorities;
 

@@ -1,6 +1,6 @@
 package com.epam.travelagency.controller;
 
-import com.epam.travelagency.entity.User;
+import com.epam.travelagency.entity.UserPrincipal;
 import com.epam.travelagency.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/api")
 public class UnauthenticatedUserController {
 
     private final UserService userService;
@@ -21,10 +21,10 @@ public class UnauthenticatedUserController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<User> register(@RequestBody @Valid User user) {
-        ResponseEntity<User> responseEntity;
+    public ResponseEntity<UserPrincipal> register(@RequestBody @Valid UserPrincipal user) {
+        ResponseEntity<UserPrincipal> responseEntity;
 
-        if (userService.create(user.getLogin(), user.getPassword())) {
+        if (userService.create(user.getUsername(), user.getPassword())) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             responseEntity = new ResponseEntity<>(user, HttpStatus.CONFLICT);
