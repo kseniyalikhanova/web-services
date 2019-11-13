@@ -25,7 +25,9 @@ public abstract class AbstractService<T, R extends Repository<T>> implements Ser
     @Override
     public boolean delete(Integer id) {
         boolean isDeleted = true;
-        if (repository.isArchival(id) == 0) {
+        Short isArchival = repository.isArchival(id);
+        System.out.println("help" + isArchival);
+        if (isArchival != null && isArchival.equals(Short.valueOf("0"))) {
             repository.deleteById(id);
         } else {
             isDeleted = false;

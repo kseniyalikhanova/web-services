@@ -10,7 +10,7 @@ public interface CountryRepository extends Repository<Country> {
     @Override
     @Query(value = "SELECT is_archival FROM travel_agency.country WHERE id=?",
             nativeQuery = true)
-    short isArchival(Integer id);
+    Short isArchival(Integer id);
 
     @Override
     @Query(value = "UPDATE travel_agency.country SET is_archival=1 WHERE id=?",

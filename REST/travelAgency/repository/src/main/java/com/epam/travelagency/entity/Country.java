@@ -5,9 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@EqualsAndHashCode
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -24,7 +22,7 @@ public class Country {
     private String name;
 
     @Column(name = "is_archival", nullable = false)
-    private short isArchival;
+    private Short isArchival;
 
     public Country(final String newName) {
         this.name = newName;

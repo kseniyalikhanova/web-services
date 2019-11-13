@@ -66,7 +66,7 @@ public class Tour {
     private List<User> users = new LinkedList<>();
 
     @Column(name = "is_archival", nullable = false)
-    private short isArchival;
+    private Short isArchival;
 
     public Tour(final Integer newId, final String newPhoto, final Date newDate,
                 final short newDuration, final String newDescription, final BigDecimal newCost,

@@ -21,7 +21,7 @@ public class CountryRepositoryTest {
 
     @Autowired
     @Qualifier("countryRepository")
-    private Repository<Country> repository;
+    private CountryRepository repository;
 
     @Test
     public void getAll_correctListSize() {
@@ -31,6 +31,11 @@ public class CountryRepositoryTest {
     @Test
     public void findById_happyPath() {
         Assert.assertEquals("Portugal", repository.findById(START_ID).get().getName());
+    }
+
+    @Test
+    public void isArchival_True() {
+       Assert.assertEquals(Short.valueOf("0"), repository.isArchival(START_ID));
     }
 
     @Test
@@ -45,11 +50,11 @@ public class CountryRepositoryTest {
     @Transactional
     public void delete_happyPath() {
         repository.deleteById(START_ID);
-        Assert.assertNull(repository.isArchival(START_ID) == 1);
+        Assert.assertEquals(Short.valueOf("1"), repository.isArchival(START_ID));
     }
 
     @Test
     public void findByNonexistentId_notFound() {
-        Assert.assertNull(repository.findById(START_ID - 1));
+        Assert.assertFalse(repository.findById(START_ID - 1).isPresent());
     }
 }

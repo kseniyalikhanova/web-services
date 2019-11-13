@@ -10,7 +10,7 @@ ALTER SEQUENCE travel_agency.user_id_seq RESTART WITH 1;
 CREATE TABLE IF NOT EXISTS travel_agency.country
 (
   id   SERIAL PRIMARY KEY,
-  name character varying(60) NOT NULL UNIQUE
+  name character varying(60) NOT NULL UNIQUE,
   is_archival smallint DEFAULT 0
 );
 ALTER SEQUENCE travel_agency.country_id_seq RESTART WITH 1;
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS travel_agency.hotel
   website   character varying(63) NOT NULL,
   latitude  double precision      NOT NULL CHECK (latitude > -90 and latitude <= 90),
   longitude double precision      NOT NULL CHECK (longitude > -180 and longitude <= 180),
-  features  feature[]
+  features  feature[],
   is_archival smallint DEFAULT 0
 );
 ALTER SEQUENCE travel_agency.hotel_id_seq RESTART WITH 1;
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS travel_agency.tour
   cost        numeric                                   NOT NULL CHECK (cost > 0),
   tour_type   tour_type                                 NOT NULL,
   hotel_id    int references travel_agency.hotel (id)   NOT NULL,
-  country_id  int references travel_agency.country (id) NOT NULL
+  country_id  int references travel_agency.country (id) NOT NULL,
   is_archival smallint DEFAULT 0
 );
 ALTER SEQUENCE travel_agency.tour_id_seq RESTART WITH 1;
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS travel_agency.review
   date    date                                   NOT NULL DEFAULT NOW(),
   text    text                                   NOT NULL,
   user_id int references travel_agency.user (id) NOT NULL,
-  tour_id int references travel_agency.tour (id) NOT NULL
+  tour_id int references travel_agency.tour (id) NOT NULL,
   is_archival smallint DEFAULT 0
 );
 ALTER SEQUENCE travel_agency.review_id_seq RESTART WITH 1;

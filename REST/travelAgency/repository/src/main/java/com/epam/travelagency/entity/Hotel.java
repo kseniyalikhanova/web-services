@@ -45,7 +45,7 @@ public class Hotel {
     private List<Feature> features;
 
     @Column(name = "is_archival", nullable = false)
-    private short isArchival;
+    private Short isArchival;
 
     public Hotel(final String newName, final short newStars,
                  final String newWebsite, final double newLatitude,

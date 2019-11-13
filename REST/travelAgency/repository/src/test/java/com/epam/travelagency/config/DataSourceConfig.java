@@ -47,7 +47,7 @@ public class DataSourceConfig {
 
     @Bean
     @DependsOn("flyway")
-    public LocalContainerEntityManagerFactoryBean getManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
         emf.setPackagesToScan("com.epam.travelagency.entity");

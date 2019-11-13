@@ -20,7 +20,7 @@ public interface UserRepository extends Repository<User> {
     Integer hasTour(Integer userId, Integer tourId);
 
     @Override
-    default short isArchival(Integer id) {
+    default Short isArchival(Integer id) {
         return 0;
     }
 }

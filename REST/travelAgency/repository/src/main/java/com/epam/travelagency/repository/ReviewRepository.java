@@ -9,7 +9,7 @@ public interface ReviewRepository extends Repository<Review> {
     @Override
     @Query(value = "SELECT is_archival FROM travel_agency.review WHERE id=?",
             nativeQuery = true)
-    short isArchival(Integer id);
+    Short isArchival(Integer id);
 
     @Override
     @Query(value = "UPDATE travel_agency.review SET is_archival=1 WHERE id=?",
