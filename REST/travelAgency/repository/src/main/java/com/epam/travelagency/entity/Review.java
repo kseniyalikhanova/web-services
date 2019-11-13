@@ -33,7 +33,7 @@ public class Review {
     private Tour tour;
 
     @Column(name = "is_archival", nullable = false)
-    private Short isArchival;
+    private Short isArchival = Short.valueOf("0");
 
     public Review(final String newText,
                   final User newUser,

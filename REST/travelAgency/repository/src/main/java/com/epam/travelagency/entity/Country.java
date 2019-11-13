@@ -22,7 +22,7 @@ public class Country {
     private String name;
 
     @Column(name = "is_archival", nullable = false)
-    private Short isArchival;
+    private Short isArchival = Short.valueOf("0");
 
     public Country(final String newName) {
         this.name = newName;
