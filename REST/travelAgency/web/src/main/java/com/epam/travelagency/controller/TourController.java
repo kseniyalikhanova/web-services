@@ -62,7 +62,6 @@ public class TourController {
     public ResponseEntity<String> writeReviewOnTour(@PathVariable("id") Integer id,
                                                     @RequestParam("text") String text) {
         ResponseEntity<String> responseEntity;
-
         if (reviewService.create(text, sessionUser.getId(), id)) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {

@@ -24,7 +24,6 @@ public class UnauthenticatedUserController {
     @PostMapping("/registration")
     public ResponseEntity<String> register(@RequestBody @Valid UserPrincipal user) {
         ResponseEntity<String> responseEntity;
-
         if (userService.create(user.getUsername(), user.getPassword())) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
@@ -32,7 +31,6 @@ public class UnauthenticatedUserController {
             toReturn.put("Response", user);
             responseEntity = new ResponseEntity<>(toReturn.toString(), HttpStatus.CONFLICT);
         }
-
         return responseEntity;
     }
 
