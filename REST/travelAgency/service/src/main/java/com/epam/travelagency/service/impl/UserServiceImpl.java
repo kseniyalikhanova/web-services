@@ -66,7 +66,7 @@ public class UserServiceImpl extends AbstractService<User, UserRepository> imple
     }
 
     @Override
-    public List<Tour> getUserTours(Integer userId) {
+    public List<Tour> getTours(Integer userId) {
         return getById(userId).getTours();
     }
 }

@@ -2,6 +2,7 @@ package com.epam.travelagency.controller;
 
 import com.epam.travelagency.entity.UserPrincipal;
 import com.epam.travelagency.service.UserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,15 @@ public class UnauthenticatedUserController {
     }
 
     @PostMapping("/registration")
-    public ResponseEntity<UserPrincipal> register(@RequestBody @Valid UserPrincipal user) {
-        ResponseEntity<UserPrincipal> responseEntity;
+    public ResponseEntity<String> register(@RequestBody @Valid UserPrincipal user) {
+        ResponseEntity<String> responseEntity;
 
         if (userService.create(user.getUsername(), user.getPassword())) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
-            responseEntity = new ResponseEntity<>(user, HttpStatus.CONFLICT);
+            JSONObject toReturn = new JSONObject();
+            toReturn.put("Response", user);
+            responseEntity = new ResponseEntity<>(toReturn.toString(), HttpStatus.CONFLICT);
         }
 
         return responseEntity;

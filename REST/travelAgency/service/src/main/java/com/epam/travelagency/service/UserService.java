@@ -17,5 +17,5 @@ public interface UserService extends Service<User> {
 
     User getByLogin(String login);
 
-    List<Tour> getUserTours(Integer userId);
+    List<Tour> getTours(Integer userId);
 }

@@ -57,8 +57,14 @@ public class Tour {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @ManyToMany(mappedBy = "tours")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_tour",
+            inverseJoinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
     private List<User> users = new LinkedList<>();
+//    @ManyToMany(mappedBy = "tours")
 
     public Tour(final Integer newId, final String newPhoto, final Date newDate,
                 final short newDuration, final String newDescription, final BigDecimal newCost,
