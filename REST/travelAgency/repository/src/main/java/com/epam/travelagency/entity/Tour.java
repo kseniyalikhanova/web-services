@@ -64,7 +64,9 @@ public class Tour {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
     private List<User> users = new LinkedList<>();
-//    @ManyToMany(mappedBy = "tours")
+
+    @Column(name = "is_archival", nullable = false)
+    private short isArchival;
 
     public Tour(final Integer newId, final String newPhoto, final Date newDate,
                 final short newDuration, final String newDescription, final BigDecimal newCost,

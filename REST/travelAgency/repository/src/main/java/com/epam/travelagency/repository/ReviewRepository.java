@@ -1,15 +1,18 @@
 package com.epam.travelagency.repository;
 
 import com.epam.travelagency.entity.Review;
-import com.epam.travelagency.entity.Tour;
-import com.epam.travelagency.entity.User;
-
-import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 
 @org.springframework.stereotype.Repository
 public interface ReviewRepository extends Repository<Review> {
 
-    List<Review> getAllByTour(Tour tour);
+    @Override
+    @Query(value = "SELECT is_archival FROM travel_agency.review WHERE id=?",
+            nativeQuery = true)
+    short isArchival(Integer id);
 
-    List<Review> getAllByUser(User user);
+    @Override
+    @Query(value = "UPDATE travel_agency.review SET is_archival=1 WHERE id=?",
+            nativeQuery = true)
+    void deleteById(Integer id);
 }

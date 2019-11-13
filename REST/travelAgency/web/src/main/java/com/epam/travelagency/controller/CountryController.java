@@ -57,4 +57,15 @@ public class CountryController {
         }
         return responseEntity;
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        ResponseEntity<String> responseEntity;
+        if (countryService.delete(id)) {
+            responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            responseEntity = new ResponseEntity<>("The country, you are trying to delete, doesn't exist.", HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
 }

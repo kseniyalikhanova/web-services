@@ -51,14 +51,4 @@ public class ReviewServiceImpl extends AbstractService<Review, ReviewRepository>
         review.setTour(tourService.getById(tourId));
         repository.save(review);
     }
-
-    @Override
-    public List<Review> getByTourId(Integer tourId) {
-        return repository.getAllByTour(tourService.getById(tourId));
-    }
-
-    @Override
-    public List<Review> getByUserId(Integer userId) {
-        return repository.getAllByUser(userService.getById(userId));
-    }
 }

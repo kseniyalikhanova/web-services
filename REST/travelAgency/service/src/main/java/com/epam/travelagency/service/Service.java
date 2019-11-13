@@ -6,7 +6,7 @@ public interface Service<T> {
 
     List<T> getAll();
 
-    void delete(final Integer id);
+    boolean delete(final Integer id);
 
     T getById(final Integer id);
 

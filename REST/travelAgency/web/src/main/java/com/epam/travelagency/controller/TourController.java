@@ -1,7 +1,5 @@
 package com.epam.travelagency.controller;
 
-import com.epam.travelagency.entity.Review;
-import com.epam.travelagency.entity.Tour;
 import com.epam.travelagency.service.ReviewService;
 import com.epam.travelagency.service.TourService;
 import com.epam.travelagency.service.UserService;
@@ -12,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/tour")
@@ -47,6 +43,17 @@ public class TourController {
         return new ResponseEntity<>(toReturn.toString(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        ResponseEntity<String> responseEntity;
+        if (tourService.delete(id)) {
+            responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
+        } else {
+            responseEntity = new ResponseEntity<>("The tour, you are trying to delete, doesn't exist.", HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
+
     @PostMapping("/order/{id}")
     public ResponseEntity<String> order(@PathVariable(value = "id") Integer id) {
         ResponseEntity<String> responseEntity;
@@ -58,7 +65,7 @@ public class TourController {
         return responseEntity;
     }
 
-    @PostMapping("/{id}/addReview")
+    @PostMapping("/{id}/review")
     public ResponseEntity<String> writeReviewOnTour(@PathVariable("id") Integer id,
                                                     @RequestParam("text") String text) {
         ResponseEntity<String> responseEntity;

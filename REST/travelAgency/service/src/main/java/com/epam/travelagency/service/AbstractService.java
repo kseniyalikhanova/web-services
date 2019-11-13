@@ -23,8 +23,14 @@ public abstract class AbstractService<T, R extends Repository<T>> implements Ser
     }
 
     @Override
-    public void delete(Integer id) {
-        repository.deleteById(id);
+    public boolean delete(Integer id) {
+        boolean isDeleted = true;
+        if (repository.isArchival(id) == 0) {
+            repository.deleteById(id);
+        } else {
+            isDeleted = false;
+        }
+        return isDeleted;
     }
 
     @Override

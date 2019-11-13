@@ -6,8 +6,6 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -33,6 +31,9 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "tour_id")
     private Tour tour;
+
+    @Column(name = "is_archival", nullable = false)
+    private short isArchival;
 
     public Review(final String newText,
                   final User newUser,

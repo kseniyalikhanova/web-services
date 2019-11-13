@@ -10,8 +10,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -45,6 +43,9 @@ public class Hotel {
     @Enumerated(EnumType.STRING)
     @Type(type = "features")
     private List<Feature> features;
+
+    @Column(name = "is_archival", nullable = false)
+    private short isArchival;
 
     public Hotel(final String newName, final short newStars,
                  final String newWebsite, final double newLatitude,

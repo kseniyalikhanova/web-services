@@ -18,4 +18,9 @@ public interface UserRepository extends Repository<User> {
             + "WHERE user_id=? and tour_id=?",
             nativeQuery = true)
     Integer hasTour(Integer userId, Integer tourId);
+
+    @Override
+    default short isArchival(Integer id) {
+        return 0;
+    }
 }

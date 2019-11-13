@@ -11,8 +11,4 @@ public interface ReviewService extends Service<Review> {
 
     void update(Integer id, Date date, String text,
                 Integer userId, Integer tourId);
-
-    List<Review> getByTourId(Integer tourId);
-
-    List<Review> getByUserId(Integer userId);
 }

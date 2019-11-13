@@ -3,6 +3,7 @@ package com.epam.travelagency.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode
 @Getter
@@ -21,6 +22,9 @@ public class Country {
 
     @Column(name = "name", nullable = false, length = 60)
     private String name;
+
+    @Column(name = "is_archival", nullable = false)
+    private short isArchival;
 
     public Country(final String newName) {
         this.name = newName;
