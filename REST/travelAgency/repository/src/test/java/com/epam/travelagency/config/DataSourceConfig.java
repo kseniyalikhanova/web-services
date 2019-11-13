@@ -2,31 +2,30 @@ package com.epam.travelagency.config;
 
 import com.opentable.db.postgres.embedded.EmbeddedPostgres;
 import org.flywaydb.core.Flyway;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
 
-@Configuration
-@ComponentScan(basePackages = {"com.epam.travelagency.entity",
-        "com.epam.travelagency.parser",
-        "com.epam.travelagency.repository",
-        "com.epam.travelagency.repository",
-        "com.epam.travelagency.specification",
-        "com.epam.travelagency.config",
-        "com.epam.travelagency.util"})
-public class TestAppConfig {
+@SpringBootConfiguration
+@EnableTransactionManagement
+@EnableAspectJAutoProxy
+public class DataSourceConfig {
     @Bean
     EmbeddedPostgres embeddedPostgres() throws IOException {
         return EmbeddedPostgres.start();
@@ -41,7 +40,9 @@ public class TestAppConfig {
     @Bean(initMethod = "migrate")
     @DependsOn("dataSource")
     public Flyway flyway(DataSource dataSource) {
-        return Flyway.configure().mixed(true).dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().mixed(true).dataSource(dataSource).load();
+        flyway.migrate();
+        return flyway;
     }
 
     @Bean
@@ -63,18 +64,9 @@ public class TestAppConfig {
 
     @Bean
     @DependsOn("flyway")
-    public PlatformTransactionManager transactionManager(EntityManagerFactory managerFactory, DataSource dataSource) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(managerFactory);
-        transactionManager.setDataSource(dataSource);
-        return transactionManager;
+    public PlatformTransactionManager transactionManager(EntityManagerFactory managerFactory) {
+        return new JpaTransactionManager(managerFactory);
     }
-
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
-
 
     private Properties jpaProperties() {
         Properties properties = new Properties();
