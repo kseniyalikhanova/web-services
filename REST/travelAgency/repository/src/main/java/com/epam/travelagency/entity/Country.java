@@ -26,4 +26,9 @@ public class Country {
     public Country(final String newName) {
         this.name = newName;
     }
+
+    public Country(final Integer id, final String newName) {
+        this.id = id;
+        this.name = newName;
+    }
 }

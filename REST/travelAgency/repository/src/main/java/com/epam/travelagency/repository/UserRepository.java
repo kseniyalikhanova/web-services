@@ -19,8 +19,7 @@ public interface UserRepository extends Repository<User> {
             nativeQuery = true)
     Integer hasTour(Integer userId, Integer tourId);
 
-    @Override
     default Short isArchival(Integer id) {
-        return 0;
+        return Short.valueOf("0");
     }
 }

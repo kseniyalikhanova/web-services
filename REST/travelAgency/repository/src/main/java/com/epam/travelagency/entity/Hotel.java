@@ -57,4 +57,16 @@ public class Hotel {
         this.longitude = newLongitude;
         this.features = newFeatures;
     }
+
+    public Hotel(final Integer id, final String newName, final short newStars,
+                 final String newWebsite, final double newLatitude,
+                 final double newLongitude, final List<Feature> newFeatures) {
+        this.id = id;
+        this.name = newName;
+        this.stars = newStars;
+        this.website = newWebsite;
+        this.latitude = newLatitude;
+        this.longitude = newLongitude;
+        this.features = newFeatures;
+    }
 }
