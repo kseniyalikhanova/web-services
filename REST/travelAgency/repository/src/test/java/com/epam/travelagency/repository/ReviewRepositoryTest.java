@@ -89,5 +89,16 @@ public class ReviewRepositoryTest {
     public void findByNonexistentId_notFound() {
         Assert.assertFalse(repository.findById(START_ID - 1).isPresent());
     }
+
+    @Test
+    public void getReviewsIdByTourId_correctListSize() {
+        Assert.assertEquals(1, repository.getReviewsIdByTourId(
+                review.getTour().getId()).size());
+    }
+
+    @Test
+    public void getAllByTour_correctListSize() {
+        Assert.assertEquals(1, repository.getAllByTour(review.getTour()).size());
+    }
 }
 
