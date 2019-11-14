@@ -1,6 +1,8 @@
 package com.epam.travelagency.controller;
 
 import com.epam.travelagency.service.Service;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public abstract class AbstractController<S extends Service> {
 
     protected final S service;
+    protected static final Logger LOG = LogManager.getLogger("logger");
 
     @Autowired
     public AbstractController(S service) {

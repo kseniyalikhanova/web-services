@@ -23,20 +23,28 @@ public class CountryController extends AbstractController<CountryService> {
         if (service.update(country.getId(), country.getName())) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
+            String errorMessage = "Country with name = " + country.getName() + " doesn't exist.";
+            LOG.warn(errorMessage);
             JSONObject toReturn = new JSONObject();
             toReturn.put("Response", country);
-            responseEntity = new ResponseEntity<>(toReturn.toString(), HttpStatus.CONFLICT);
+            toReturn.put("Message", errorMessage);
+            responseEntity = new ResponseEntity<>(toReturn.toString(), HttpStatus.NOT_MODIFIED);
         }
         return responseEntity;
     }
 
     @PostMapping()
-    public ResponseEntity<Country> create(@RequestBody Country country) {
-        ResponseEntity<Country> responseEntity;
+    public ResponseEntity<String> create(@RequestBody Country country) {
+        ResponseEntity<String> responseEntity;
         if (service.create(country.getName())) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
-            responseEntity = new ResponseEntity<>(country, HttpStatus.CONFLICT);
+            String errorMessage = "Country with name = " + country.getName() + " exists.";
+            LOG.warn(errorMessage);
+            JSONObject toReturn = new JSONObject();
+            toReturn.put("Response", country);
+            toReturn.put("Message", errorMessage);
+            responseEntity = new ResponseEntity<>(toReturn.toString(), HttpStatus.CONFLICT);
         }
         return responseEntity;
     }

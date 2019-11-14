@@ -32,7 +32,9 @@ public class TourController extends AbstractController<TourService> {
         if (userService.addTour(sessionUser.getId(), id)) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
-            responseEntity = new ResponseEntity<>(HttpStatus.CONFLICT);
+            String errorMessage = "You cannot order this tour because you already have it";
+            LOG.warn(errorMessage);
+            responseEntity = new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
@@ -44,7 +46,9 @@ public class TourController extends AbstractController<TourService> {
         if (reviewService.create(text, sessionUser.getId(), id)) {
             responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
-            responseEntity = new ResponseEntity<>(HttpStatus.CONFLICT);
+            String errorMessage = "You can't write review, because you haven't this tour.";
+            LOG.warn(errorMessage);
+            responseEntity = new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
         }
         return responseEntity;
     }
