@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan
 @Import(RabbitConfiguration.class)
 public class Configuration {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(Configuration.class, args);
     }
 

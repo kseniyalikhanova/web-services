@@ -1,6 +1,5 @@
 package by.bsu.rabbitmq;
 
-import org.apache.log4j.Logger;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
@@ -52,8 +51,8 @@ public class RabbitConfiguration {
         mailSender.setPort(587);
 
 
-        mailSender.setUsername("****");
-        mailSender.setPassword("****");
+        mailSender.setUsername("*****");
+        mailSender.setPassword("*****");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
